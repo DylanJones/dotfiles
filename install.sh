@@ -12,8 +12,8 @@ USER="$(whoami)"
 
 # do the config symlinks
 
-TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim)
-TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim)
+TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting)
+TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting)
 
 for i in {1..${#TO_INSTALL}}; do
     if [ -f "${TO_PATHS[i]}" ]; then
@@ -30,18 +30,25 @@ cd "$INSTALL_PATH"
 git submodule update --init --recursive
 
 # install distro-specific packages
-RELEASE_STR="$(tr '[:upper:]' '[:lower:]' < /etc/issue)"
+# check for sudo access first
+if sudo -l >/dev/null; then
+    RELEASE_STR="$(tr '[:upper:]' '[:lower:]' < /etc/issue)"
 
-case "$RELEASE_STR" in
-    *debian*|*ubuntu*|*raspbian* )
-        # do apt stuff
-        sudo apt install -y python3 python3-pip python3-dev build-essential zsh cmake tmux vim
-        ;;
-    *arch* )
-        # do arch stuff
-        sudo pacman -S --noconfirm --needed python-pip base-devel zsh git cmake tmux vim
-        ;;
-esac
+    case "$RELEASE_STR" in
+        *debian*|*ubuntu*|*raspbian* )
+            # do apt stuff
+            sudo apt install -y python3 python3-pip python3-dev build-essential zsh cmake tmux vim
+            ;;
+        *arch* )
+            # do arch stuff
+            sudo pacman -S --noconfirm --needed python-pip base-devel zsh git cmake tmux vim
+            ;;
+    esac
+else
+    echo "You don't have sudo privelages!"
+    echo "Hopefully everything you need is installed"
+    echo "Required packages: python3, pip, some compiler, cmake, git, tmux, vim"
+fi
 
 # install pip packages
 pip install --user thefuck git+git://github.com/powerline/powerline
