@@ -64,7 +64,7 @@ PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[
 if [[ "$PY_VER" != "python3.6"  ]]; then
     echo "Old python detected ($PY_VER), changing references to reflect that"
     cd "$INSTALL_PATH"
-    find -type f -exec sed -i "s/python3\\.6/$PY_VER/g" {} \;
+    find -type f -not -name install.sh -exec sed -i "s/python3\\.6/$PY_VER/g" {} \;
 fi
 
 # change shell to zsh

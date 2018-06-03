@@ -1,0 +1,6 @@
+[Service]
+Type=simple
+ExecStart=/usr/bin/zsh -c "powerline-daemon --foreground"
+
+[Install]
+WantedBy=default.target
