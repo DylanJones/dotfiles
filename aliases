@@ -1,0 +1,29 @@
+alias emacs='emacs -nw'
+alias intl='setxkbmap us intl'
+alias us='setxkbmap us'
+alias lock='i3lock'
+
+pacs() { pacman -Fo /usr/bin/$1 }
+
+alias rel='exec zsh'
+
+alias elinks='w3m'
+alias nano='vim'
+
+tether_bluetooth() {
+  echo "power on\nconnect c0:ee:fb:db:66:b6" | bluetoothctl
+  sleep 10
+  dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0/dev_C0_EE_FB_DB_66_B6 org.bluez.Network1.Connect string:'nap'
+  sleep 2
+  sudo dhcpcd bnep0
+}
+
+function swap() {
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "usage: $0 <file1> <file2>"
+        return 1
+    fi
+    mv "$1" /tmp/thing_that_is_being_swapped_by_the_swap_function
+    mv "$2" "$1"
+    mv /tmp/thing_that_is_being_swapped_by_the_swap_function "$2"
+}
