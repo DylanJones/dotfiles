@@ -11,13 +11,16 @@ INSTALL_PATH="$(realpath $(dirname $0))"
 USER="$(whoami)"
 
 # do the config symlinks
-
 TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting)
 TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting)
 
 for i in {1..${#TO_INSTALL}}; do
     if [ -f "${TO_PATHS[i]}" ]; then
-        rm -ri "${TO_PATHS[i]}"
+        if [ -f "$INSTALL_PATH/overwrite" ]; then
+            rm "${TO_PATHS[i]}"
+        else
+            rm -ri "${TO_PATHS[i]}"
+        fi
     fi
     if ! [ -f "${TO_PATHS[i]}" ]; then
         mkdir -p "$(dirname ${TO_PATHS[i]})"
@@ -45,10 +48,26 @@ if sudo -l >/dev/null; then
             ;;
     esac
 else
+    echo
     echo "You don't have sudo privelages!"
     echo "Hopefully everything you need is installed"
     echo "Required packages: python3, pip, some compiler, cmake, git, tmux, vim"
+    echo
 fi
+
 
 # install pip packages
 pip install --user thefuck git+git://github.com/powerline/powerline
+
+# If there are any references to python3.6, change them in case we have an old python version
+PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[0])+'.'+str(vi[1]))")"
+if [[ "$PY_VER" != "python3.6"  ]]; then
+    echo "Old python detected ($PY_VER), changing references to reflect that"
+    cd "$INSTALL_PATH"
+    find -type f -exec sed -i "s/python3\\.6/$PY_VER/g" \;
+fi
+
+# Done: record that we already finished so we have permission to overwrite in future
+echo yes > "$INSTALL_PATH/overwrite"
+
+echo "Done installing custom config!"

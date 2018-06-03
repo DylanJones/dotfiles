@@ -130,7 +130,7 @@ if [ -f ~/.aliases ]; then
 	source ~/.aliases
 fi
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Unfortuantley, powerline is too slow.
 # never mind, just need to start powerline-daemon
