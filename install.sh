@@ -67,6 +67,10 @@ if [[ "$PY_VER" != "python3.6"  ]]; then
     find -type f -exec sed -i "s/python3\\.6/$PY_VER/g" \;
 fi
 
+# change shell to zsh
+echo "Changing default shell - enter password and /bin/zsh"
+chsh
+
 # Done: record that we already finished so we have permission to overwrite in future
 echo yes > "$INSTALL_PATH/overwrite"
 
