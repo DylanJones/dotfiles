@@ -15,7 +15,7 @@ TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlig
 TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting ~/.config/systemd/user/powerline-daemon.service)
 
 for i in {1..${#TO_INSTALL}}; do
-    if [ -f "${TO_PATHS[i]}" ]; then
+    if [ -f "${TO_PATHS[i]}" ] || [ -d "${TO_PATHS[i]}" ]; then
         if [ -f "$INSTALL_PATH/overwrite" ]; then
             rm "${TO_PATHS[i]}"
         else
@@ -24,7 +24,7 @@ for i in {1..${#TO_INSTALL}}; do
     fi
     if ! [ -f "${TO_PATHS[i]}" ]; then
         mkdir -p "$(dirname ${TO_PATHS[i]})"
-        ln -sf "$INSTALL_PATH/${TO_INSTALL[i]}" "${TO_PATHS[i]}"
+        ln -sfT "$INSTALL_PATH/${TO_INSTALL[i]}" "${TO_PATHS[i]}"
     fi
 done
 
