@@ -1,3 +1,4 @@
+#!/bin/zsh
 alias emacs='emacs -nw'
 alias intl='setxkbmap us intl'
 alias us='setxkbmap us'
@@ -20,10 +21,30 @@ tether_bluetooth() {
 
 function swap() {
     if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Swaps two files."
         echo "usage: $0 <file1> <file2>"
         return 1
     fi
     mv "$1" /tmp/thing_that_is_being_swapped_by_the_swap_function
     mv "$2" "$1"
     mv /tmp/thing_that_is_being_swapped_by_the_swap_function "$2"
+}
+
+update_config() {
+    CFG_DIR="$(dirname $(readlink -f ~/.zshrc))"
+    cd "$CFG_DIR"
+    if ! git diff-index --quiet HEAD --; then
+        echo    "Repository differs."
+        echo -n "Destroy local changes? [Y/n] "
+        read answer
+        answer="$(echo "$answer" | tr '[:upper:]' '[:lower:]')"
+        if [[ "$answer" != "n" ]] && [[ "$answer" != "no" ]]; then
+            git reset --hard
+        else
+            echo "Abort."
+            return 1
+        fi
+    fi
+    git pull
+    exec zsh
 }

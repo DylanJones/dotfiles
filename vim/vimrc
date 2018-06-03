@@ -1,5 +1,5 @@
 " some reasonable defaults, like syntax highlighting
-source /usr/share/vim/vim81/defaults.vim 
+source /usr/share/vim/vim8?/defaults.vim 
 
 execute pathogen#infect()
 
