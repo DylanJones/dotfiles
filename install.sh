@@ -11,8 +11,8 @@ INSTALL_PATH="$(realpath $(dirname $0))"
 USER="$(whoami)"
 
 # do the config symlinks
-TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting)
-TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting)
+TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting powerline-daemon.service)
+TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting ~/.config/systemd/user/powerline-daemon.service)
 
 for i in {1..${#TO_INSTALL}}; do
     if [ -f "${TO_PATHS[i]}" ]; then
@@ -70,6 +70,11 @@ fi
 # change shell to zsh
 echo "Changing default shell - enter password and /bin/zsh"
 chsh
+
+# install and enable powerline-daemon systemd service
+systemctl --user daemon-reload
+systemctl --user enable powerline-daemon
+systemctl --user start powerline-daemon
 
 # Done: record that we already finished so we have permission to overwrite in future
 echo yes > "$INSTALL_PATH/overwrite"
