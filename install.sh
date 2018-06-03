@@ -57,7 +57,7 @@ fi
 
 
 # install pip packages
-pip install --user thefuck git+git://github.com/powerline/powerline
+pip3 install --user thefuck git+git://github.com/powerline/powerline
 
 # If there are any references to python3.6, change them in case we have an old python version
 PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[0])+'.'+str(vi[1]))")"
