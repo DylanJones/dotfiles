@@ -116,6 +116,11 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# Load machine-local config, if it exists
+if [ -f ~/.local_config ]; then
+    source ~/.local_config
+fi
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -132,12 +137,17 @@ fi
 
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Unfortuantley, powerline is too slow.
-# never mind, just need to start powerline-daemon
-# powerline-daemon -q
-# doing it as a systemd service now
-. "$HOME/.local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
-# powerline-daemon
+if [ -z "$CONFIG_DISABLE_POWERLINE" ]; then
+    # Unfortuantley, powerline is too slow.
+    # never mind, just need to start powerline-daemon
+    # powerline-daemon -q
+    # doing it as a systemd service now
+    . "$HOME/.local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
+    # most people don't have systemd user services tho
+    if ! pgrep -f powerline-daemon >/dev/null; then
+        powerline-daemon
+    fi
+fi
 
 # The following lines were added by compinstall
 
@@ -180,29 +190,29 @@ eval $(thefuck --alias )
 
 # make agnoster theme not be eye cancer
 # context: display user, with proper highlighting if necesary
-#prompt_context() {
-#  local user=`whoami`
-#
-#  if [[ "$user" == "dylan" && -z "$SSH_CONNECTION" ]]; then
-#    prompt_segment 31 white "%B%(!.%{%F{black}%}.)$user%b"
-#  else
-#    prompt_segment red white "%B%(!.%{%F{black}%}.)$user%b"
-#  fi
-#}
-#prompt_status() {
-#  local symbols
-#  symbols=()
-#  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
-#  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
-#  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
-#
-#  [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
-#}
-#prompt_dir() {
-#    DIR="$(echo $(pwd) | sed "s/\// $(echo -ne \\uE0B1) /g")"
-#    prompt_segment 240 252 "%b$DIR%b"
-#}
-#
-## make agnoster faster
-#prompt_hg() {}
-#prompt_bzr() {}
+prompt_context() {
+  local user=`whoami`
+
+  if [[ "$user" == "dylan" && -z "$SSH_CONNECTION" ]]; then
+    prompt_segment 31 white "%B%(!.%{%F{black}%}.)$user%b"
+  else
+    prompt_segment red white "%B%(!.%{%F{black}%}.)$user%b"
+  fi
+}
+prompt_status() {
+  local symbols
+  symbols=()
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
+  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+
+  [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
+}
+prompt_dir() {
+    DIR="$(echo $(pwd) | sed "s/\// $(echo -ne \\uE0B1) /g")"
+    prompt_segment 240 252 "%b$DIR%b"
+}
+
+# make agnoster faster
+prompt_hg() {}
+prompt_bzr() {}
