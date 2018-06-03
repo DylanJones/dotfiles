@@ -24,7 +24,7 @@ for i in {1..${#TO_INSTALL}}; do
     fi
     if ! [ -f "${TO_PATHS[i]}" ]; then
         mkdir -p "$(dirname ${TO_PATHS[i]})"
-        ln -s "$INSTALL_PATH/${TO_INSTALL[i]}" "${TO_PATHS[i]}"
+        ln -sf "$INSTALL_PATH/${TO_INSTALL[i]}" "${TO_PATHS[i]}"
     fi
 done
 
