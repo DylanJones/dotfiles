@@ -11,8 +11,8 @@ INSTALL_PATH="$(realpath $(dirname $0))"
 USER="$(whoami)"
 
 # do the config symlinks
-TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting powerline-daemon.service aliases)
-TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting ~/.config/systemd/user/powerline-daemon.service ~/.aliases)
+TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting powerline-daemon.service aliases Xmodmaprc)
+TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting ~/.config/systemd/user/powerline-daemon.service ~/.aliases ~/.Xmodmaprc)
 
 for i in {1..${#TO_INSTALL}}; do
     if [ -f "${TO_PATHS[i]}" ] || [ -d "${TO_PATHS[i]}" ]; then
