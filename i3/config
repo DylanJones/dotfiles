@@ -9,6 +9,9 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# Switch alt and super keys
+exec_always xmodmap ~/.Xmodmaprc
+
 # alt is mod1, super(win) is mod4
 set $mod Mod4
 
@@ -192,9 +195,6 @@ hide_edge_borders both
 #exec_always feh --bg-fill /home/dylan/Wallpapers/LunarEclipse.jpg
 # Random arch bg
 exec_always feh --bg-fill $(zsh -c 'export a=(~/Wallpapers/arch_quotes/*); echo $a[$((($RANDOM % ${#a}) + 1))]')
-
-# Switch alt and super keys
-exec_always xmodmap ~/.Xmodmaprc
 
 # Make certian windows always float
 for_window [title="Python jumping game"] floating enable
