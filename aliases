@@ -3,6 +3,7 @@ alias emacs='emacs -nw'
 alias intl='setxkbmap us intl'
 alias us='setxkbmap us'
 alias lock='i3lock'
+alias nmap='nmap -n'
 
 pacs() { pacman -Fo /usr/bin/$1 }
 
