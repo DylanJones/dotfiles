@@ -1,3 +1,8 @@
+# For X autostart
+if [[ "$TTY" == "/dev/tty1" ]] && [[ "$(hostname)" == "elohim" ]]; then
+    exec startx
+fi
+
 # If you come from bash you might have to change your $PATH.
  export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
@@ -11,7 +16,7 @@
 #ZSH_THEME="dpoggi"
 ZSH_THEME="agnoster"
 #ZSH_THEME="random"
-DEFAULT_USER='dylan'
+# DEFAULT_USER='dylan'
 
 # Disables the auto-update prompt.  If this is true and 
 # disable_auto_update is false, it will upgrade without prompting.
@@ -142,7 +147,7 @@ if [ -z "$CONFIG_DISABLE_POWERLINE" ]; then
     # never mind, just need to start powerline-daemon
     # powerline-daemon -q
     # doing it as a systemd service now
-    . "$HOME/.local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
+    . "$HOME/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
     # most people don't have systemd user services tho
     if ! pgrep -f powerline-daemon >/dev/null; then
         powerline-daemon
@@ -177,16 +182,17 @@ unsetopt beep nomatch notify
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-
 export EDITOR=vim
-# lets try this out...
-# no
 
 # Make GPG work
 export GPG_TTY=$(tty)
 
-#eval $(thefuck --alias --enable-experimental-instant-mode)
+# lets try this out...
+# no
+# eval $(thefuck --alias --enable-experimental-instant-mode)
 eval $(thefuck --alias )
+# virsh default URI, can be overriden at runtime
+export LIBVIRT_DEFAULT_URI='qemu:///system'
 
 # make agnoster theme not be eye cancer
 # context: display user, with proper highlighting if necesary

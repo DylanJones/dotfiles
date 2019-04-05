@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xinput set-prop "SynPS/2 Synaptics TouchPad" "Device Enabled" $(( $(xinput list-props "SynPS/2 Synaptics TouchPad" | grep 'Device Enabled' | cut -d $'\t' -f 3) ^1))

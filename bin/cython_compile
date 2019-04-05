@@ -1,0 +1,7 @@
+name=`echo "$1" | grep -Po ".*(?=\.[^.]{1,3}$)"`
+
+python -m cython "$1"
+gcc -c -fPIC -I/usr/include/python3.7m -o tmp.o "$name.c"
+gcc -shared tmp.o -L/usr/lib64/python3.7/ -o "$name.so"
+rm tmp.o
+rm "$name.c"

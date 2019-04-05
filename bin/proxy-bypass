@@ -1,0 +1,35 @@
+#!/bin/bash
+
+trap stop_doing INT
+
+function stop_doing () {
+    kill %1
+    sudo resolvconf -d wlp1s0
+    wait
+}
+
+echo $1
+sudo -l
+
+if [[ "$1" == "help" ]] || [[ "$1" == "" ]] ; then
+    echo "Usage: $0 <tproxy,vpn,tcpproxy>"
+    exit 1
+elif [[ "$1" == "tproxy" ]]; then
+    if ! ip rule | grep 'lookup 100' >/dev/null; then # ip rules have not been created
+        ip route add local default dev lo table 100
+        ip rule add fwmark 1 lookup 100
+    fi
+    sudo sshuttle --method=tproxy -r root@karel.pw 0/0 -x "$(host karel.pw | grep -oP '(?<=address ).*$')" &
+    sleep 5
+    echo -e "nameserver 10.62.0.4\ndomain karel.pw" | sudo resolvconf -a wlp1s0
+    echo -e "nameserver 10.62.0.4\ndomain karel.pw" | sudo tee /etc/resolv.conf
+    fg
+    # sudo openvpn ~/openvpn/laptop-tun.ovpn
+elif [[ "$1" == "vpn" ]]; then
+    sshuttle -r root@karel.pw 10.62.0.4 -x "$(host karel.pw | grep -oP '(?<=address ).*$')" &
+    sudo openvpn ~/openvpn/laptop-tun.ovpn
+elif [[ "$1" == "tcpproxy" ]]; then
+    sshuttle -r root@karel.pw 0/0 -x "$(host karel.pw | grep -oP '(?<=address ).*$')"
+fi
+
+stop_doing

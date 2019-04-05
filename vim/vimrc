@@ -6,7 +6,7 @@ execute pathogen#infect()
 " enable powerline
 let g:powerline_pycmd="python3"
 set laststatus=2
-set rtp+=~/.local/lib/python3.6/site-packages/powerline/bindings/vim
+set rtp+=~/.local/lib/python3.7/site-packages/powerline/bindings/vim
 
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
@@ -27,11 +27,16 @@ au BufWinEnter * normal zR
 let g:ycm_server_python_interpreter = '/usr/bin/python2'
 let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_confirm_extra_conf = 1
+let g:ycm_extra_conf_globlist = ['~/Arduino/bare_arduino/*']
+" let g:ycm_goto_buffer_command = 'split-or-existing-window'
+" let g:ycm_goto_buffer_command = 'split'
 
 let g:AutoPairs = {'(':')', '[':']', '{':'}'}
 
 " helpful keybindings
 nnoremap <silent> <C-l> :noh<CR>
+noremap gy <C-w>s:YcmCompleter GoTo<CR>
 
 " not so helpful keybindings
 noremap <Up> <Nop>

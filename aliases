@@ -2,7 +2,6 @@
 alias emacs='emacs -nw'
 alias intl='setxkbmap us intl'
 alias us='setxkbmap us'
-alias lock='i3lock'
 alias nmap='nmap -n'
 
 pacs() { pacman -Fo /usr/bin/$1 }
@@ -10,7 +9,10 @@ pacs() { pacman -Fo /usr/bin/$1 }
 alias rel='exec zsh'
 
 alias elinks='w3m'
+alias pacaur="echo Use aurman boi"
 alias nano='vim'
+# alias virsh='virsh -c qemu+ssh://root@skynet/system'
+# alias virsh='virsh -c qemu:///system'
 
 tether_bluetooth() {
   echo "power on\nconnect c0:ee:fb:db:66:b6" | bluetoothctl

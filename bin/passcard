@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd ~/csl/passcard
+./passcard.py "$@"

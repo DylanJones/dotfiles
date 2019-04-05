@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+scrot /tmp/screen.png
+convert /tmp/screen.png -blur 0x17 /tmp/screen2.png
+# convert /tmp/screen.png -resize 240x135 -resize 3840x2160 /tmp/screen2.png
+rm /tmp/screen.png 
+
+i3lock -i /tmp/screen2.png
+# feh /tmp/screen2.png
+rm /tmp/screen2.png

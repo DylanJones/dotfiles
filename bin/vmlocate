@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [[ "$1" == "" ]]; then
+    echo "Usage: $0 \$vm_name"
+    exit
+fi
+
+HOSTS=(chatham.csl.tjhsst.edu antipodes.csl.tjhsst.edu cocos.csl.tjhsst.edu galapagos.csl.tjhsst.edu gorgona.csl.tjhsst.edu)
+
+for host in ${HOSTS[@]}; do
+    echo "Checking $host..."
+    #ssh "root@$host" virsh list
+    ssh -q root@"$host" virsh list | grep -i "$1"
+done

@@ -11,8 +11,8 @@ INSTALL_PATH="$(realpath $(dirname $0))"
 USER="$(whoami)"
 
 # do the config symlinks
-TO_INSTALL=(tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting powerline-daemon.service aliases Xmodmaprc)
-TO_PATHS=(~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting ~/.config/systemd/user/powerline-daemon.service ~/.aliases ~/.Xmodmaprc)
+TO_INSTALL=(bin tmux.conf i3 powerline_config zshrc vim oh-my-zsh zsh-syntax-highlighting powerline-daemon.service aliases Xmodmaprc)
+TO_PATHS=(~/bin ~/.tmux.conf ~/.i3 ~/.config/powerline ~/.zshrc ~/.vim ~/.oh-my-zsh ~/.zsh-syntax-highlighting ~/.config/systemd/user/powerline-daemon.service ~/.aliases ~/.Xmodmaprc)
 
 for i in {1..${#TO_INSTALL}}; do
     if [ -f "${TO_PATHS[i]}" ] || [ -d "${TO_PATHS[i]}" ]; then
@@ -46,6 +46,8 @@ if sudo -l >/dev/null; then
             # do arch stuff
             sudo pacman -S --noconfirm --needed python-pip base-devel zsh git cmake tmux vim
             ;;
+        * )
+            echo "Unrecognized distro - you're on your own :("
     esac
 else
     echo
@@ -59,12 +61,12 @@ fi
 # install pip packages
 pip3 install --user thefuck git+git://github.com/powerline/powerline
 
-# If there are any references to python3.6, change them in case we have an old python version
+# If there are any references to python3.7, change them in case we have an old python version
 PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[0])+'.'+str(vi[1]))")"
-if [[ "$PY_VER" != "python3.6"  ]]; then
+if [[ "$PY_VER" != "python3.7"  ]]; then
     echo "Old python detected ($PY_VER), changing references to reflect that"
     cd "$INSTALL_PATH"
-    find -type f -not -name install.sh -exec sed -i "s/python3\\.6/$PY_VER/g" {} \;
+    find -type f -not -name install.sh -exec sed -i "s/python3\\.7/$py_ver/g" {} \;
 fi
 
 # change shell to zsh
