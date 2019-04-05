@@ -4,8 +4,10 @@
 			{
 				"function": "powerline.segments.common.net.hostname",
 				"priority": 10,
-                "only_if_ssh": false
-			},
+                "args": {
+                    "only_if_ssh": false
+                }
+            },
 			{
 				"function": "powerline.segments.common.env.user",
 				"priority": 30
