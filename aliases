@@ -3,6 +3,8 @@ alias emacs='emacs -nw'
 alias intl='setxkbmap us intl'
 alias us='setxkbmap us'
 alias nmap='nmap -n'
+alias tjvpn='sudo openvpn ~/openvpn/tj.ovpn'
+alias vpn='sudo openvpn ~/openvpn/laptop-tun.ovpn'
 
 pacs() { pacman -Fo /usr/bin/$1 }
 

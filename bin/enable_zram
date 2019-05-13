@@ -1,7 +1,8 @@
 #!/bin/bash
 
+sudo rmmod zram
 sudo modprobe zram
-sudo sh -c 'echo lz4 > /sys/block/zram0/comp_algorithim'
+sudo sh -c 'echo zstd > /sys/block/zram0/comp_algorithm'
 echo "Creating zram device of size 16G"
 sudo sh -c 'echo "16G" > /sys/block/zram0/disksize'
 sudo mkswap --label zram0 /dev/zram0
