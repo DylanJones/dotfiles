@@ -172,7 +172,7 @@ exec xset +fp ~/.fonts
 #exec_always killall python; python -m powerline.bindings.lemonbar.powerline-lemonbar --i3 --height 22 -- -b -f "-*-terminus-medium-*-*-*-*-180-*-*-*-*-*-*"
 bar {
         # status_command i3status
-        status_command python ~/.local/lib/python3.7/site-packages/powerline/bindings/i3/powerline-i3.py
+        status_command python ~/.local/lib/python3/site-packages/powerline/bindings/i3/powerline-i3.py
         font pango:DejaVu Sans Mono for Powerline 8
 }
 

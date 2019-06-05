@@ -61,13 +61,9 @@ fi
 # install pip packages
 pip3 install --user thefuck git+git://github.com/powerline/powerline
 
-# If there are any references to python3.7, change them in case we have an old python version
+# Create the python symlink to be compatible with old pythons
 PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[0])+'.'+str(vi[1]))")"
-if [[ "$PY_VER" != "python3.7"  ]]; then
-    echo "Old python detected ($PY_VER), changing references to reflect that"
-    cd "$INSTALL_PATH"
-    find -type f -not -name install.sh -exec sed -i "s/python3\\.7/$py_ver/g" {} \;
-fi
+ln -s ~/.local/lib/$PY_VER ~/.local/lib/python3
 
 # change shell to zsh
 echo "Changing default shell - enter password and /bin/zsh"

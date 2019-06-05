@@ -147,7 +147,7 @@ if [ -z "$CONFIG_DISABLE_POWERLINE" ]; then
     # never mind, just need to start powerline-daemon
     # powerline-daemon -q
     # doing it as a systemd service now
-    . "$HOME/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
+    . "$HOME/.local/lib/python3/site-packages/powerline/bindings/zsh/powerline.zsh"
     # most people don't have systemd user services tho
     if ! pgrep -f powerline-daemon >/dev/null; then
         powerline-daemon
