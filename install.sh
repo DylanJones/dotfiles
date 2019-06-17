@@ -72,8 +72,8 @@ PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[
 ln -s ~/.local/lib/$PY_VER ~/.local/lib/python3
 
 # change shell to zsh
-echo "Changing default shell - enter password and /bin/zsh"
-chsh
+echo "Changing default shell - enter password"
+chsh -s '/bin/zsh'
 
 # install and enable powerline-daemon systemd service
 systemctl --user daemon-reload
