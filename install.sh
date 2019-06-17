@@ -35,9 +35,10 @@ git submodule update --init --recursive
 # install distro-specific packages
 # check for sudo access first
 if sudo -l >/dev/null; then
-    RELEASE_STR="$(tr '[:upper:]' '[:lower:]' < /etc/issue)"
+    # RELEASE_STR="$(tr '[:upper:]' '[:lower:]' < /etc/issue)"
+    . /etc/os-release # only works w/ systemd
 
-    case "$RELEASE_STR" in
+    case "$ID" in
         *debian*|*ubuntu*|*raspbian* )
             # do apt stuff
             sudo apt install -y python3 python3-pip python3-dev build-essential zsh cmake tmux vim
@@ -46,6 +47,11 @@ if sudo -l >/dev/null; then
             # do arch stuff
             sudo pacman -S --noconfirm --needed python-pip base-devel zsh git cmake tmux vim
             ;;
+        *centos* )
+            # do centos stuff
+            sudo yum -y install epel-release
+            sudo yum -y install python36-pip git zsh vim tmux
+            sudo yum -y groupinstall "Development Tools"
         * )
             echo "Unrecognized distro - you're on your own :("
     esac
