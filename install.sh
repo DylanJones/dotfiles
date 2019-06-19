@@ -52,6 +52,7 @@ if sudo -l >/dev/null; then
             sudo yum -y install epel-release
             sudo yum -y install python36-pip git zsh vim tmux
             sudo yum -y groupinstall "Development Tools"
+            **
         * )
             echo "Unrecognized distro - you're on your own :("
     esac
@@ -65,10 +66,11 @@ fi
 
 
 # install pip packages
-pip3 install --user thefuck git+git://github.com/powerline/powerline
+pip3 install --user thefuck https://github.com/powerline/powerline
 
 # Create the python symlink to be compatible with old pythons
 PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[0])+'.'+str(vi[1]))")"
+mkdir -p ~/.local/lib
 ln -s ~/.local/lib/$PY_VER ~/.local/lib/python3
 
 # change shell to zsh
