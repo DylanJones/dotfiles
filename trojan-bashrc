@@ -1,0 +1,12 @@
+# if you put this as your bashrc, it will automatically run the install script upon login
+
+git clone https://github.com/DylanJones/dotfiles ~/.dotfiles
+sudo yum -y install zsh
+sudo rm -r /root/.config/pip /home/vagrant/.config/pip /home/vagrant/.pydistutils.cfg
+
+cd ~/.dotfiles
+./install.sh
+
+sudo chsh -s '/bin/zsh' "$(whoami)"
+
+exec zsh
