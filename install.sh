@@ -52,7 +52,7 @@ if sudo -l >/dev/null; then
             sudo yum -y install epel-release
             sudo yum -y install python36-pip git zsh vim tmux
             sudo yum -y groupinstall "Development Tools"
-            **
+            ;;
         * )
             echo "Unrecognized distro - you're on your own :("
     esac
