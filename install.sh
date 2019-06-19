@@ -68,8 +68,7 @@ fi
 
 
 # install pip packages
-pip3 install --user thefuck 
-pip3 install --user https://github.com/powerline/powerline
+pip3 install --user thefuck powerline-status
 
 # Create the python symlink to be compatible with old pythons
 PY_VER="$(python3 -c "from sys import version_info as vi; print('python'+str(vi[0])+'.'+str(vi[1]))")"
