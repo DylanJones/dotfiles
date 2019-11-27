@@ -122,8 +122,8 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Load machine-local config, if it exists
-if [ -f ~/.local_config ]; then
-    source ~/.local_config
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
