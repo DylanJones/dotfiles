@@ -4,7 +4,6 @@ source /usr/share/vim/vim??/defaults.vim
 " enable plugins
 execute pathogen#infect()
 
-
 " enable powerline if we have support
 if has("python3")
     let g:powerline_pycmd="python3"
