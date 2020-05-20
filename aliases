@@ -10,9 +10,9 @@ pacs() { pacman -Fo /usr/bin/$1 }
 
 alias rel='exec zsh'
 
-alias elinks='w3m'
 alias pacaur="echo Use aurman boi"
 alias nano='vim'
+function mkcd() { mkdir "$@"; cd "$1" }
 # alias virsh='virsh -c qemu+ssh://root@skynet/system'
 # alias virsh='virsh -c qemu:///system'
 

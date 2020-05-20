@@ -1,5 +1,5 @@
 #!/bin/zsh
-cat ~/Documents/alexander_cgi_password.gpg | gpg --decrypt | read SSHPASS
+cat ~/Documents/encrypted/alexander_cgi_password.gpg | gpg --decrypt | read SSHPASS
 export SSHPASS
 sshpass -e ssh cgi@alexander.karel.pw
 unset SSHPASS

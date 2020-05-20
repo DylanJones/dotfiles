@@ -25,7 +25,10 @@ set mouse=a
 
 " default unfolded
 au BufWinEnter * normal zR
-" set nofoldenable
+
+" set shiftwidth=2,tabstop=2 for yaml
+" au BufNewFile,BufRead .*\.\(yml\|yaml\) set tabstop=2 shiftwidth=2
+au FileType yaml set tabstop=2 shiftwidth=2
 
 " enable ycm
 " ycm causes soooo many problems, let's just not

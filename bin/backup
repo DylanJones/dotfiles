@@ -1,1 +1,1 @@
-duplicity ~ "b2://$B2_KEY@karel-backups/" --exclude=/home/dylan/{.local,.cache,AUR,.android,.IntelliJIdea2019.2,.mozilla} --encrypt-sign-key="$GPG_KEY_ID" -v INFO
+duplicity ~ "b2://$B2_KEY@karel-backups/" --encrypt-key=$GPG_KEY_ID --use-agent --exclude=/home/dylan/{.local,.cache,AUR,.android,.IntelliJIdea2019.2,.mozilla} -v INFO
