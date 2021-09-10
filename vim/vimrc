@@ -5,6 +5,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set foldmethod=syntax
+set bg=dark
 set mouse=a
 " A POSIX-compatible shell is required instead of fish.
 set shell=/bin/bash
@@ -44,6 +45,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'vim-airline/vim-airline'
 
 " End plugin loading section
 call vundle#end()
