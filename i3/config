@@ -36,7 +36,9 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 # LXterm has support for the powerline fonts, also it kinda looks better
-bindsym $mod+Return exec lxterminal
+# however, I'm going to go back to i3-sensible-terminal because that has
+# support on Ubuntu for launching gnome-terminal instead.
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -197,8 +199,8 @@ hide_edge_borders both
 
 # Set desktop background
 #exec_always feh --bg-fill /home/dylan/Wallpapers/LunarEclipse.jpg
-# Random arch bg
-exec_always feh --bg-fill $(zsh -c 'export a=(~/Wallpapers/arch_quotes/*); echo $a[$((($RANDOM % ${#a}) + 1))]')
+# Random bg
+exec_always feh --bg-fill $(zsh -c 'export a=(/usr/share/backgrounds/*{png,jpg}); echo $a[$((($RANDOM % ${#a}) + 1))]')
 
 # Make certian windows always float
 for_window [title="Python jumping game"] floating enable
@@ -213,3 +215,6 @@ bindsym $mod+t exec zsh ~/bin/togglemouse
 # facilities for locking the screen
 bindsym $mod+l exec xautolock -locknow
 exec xautolock -locker ~/bin/lock -time 5
+
+# C O M P T O N
+exec compton

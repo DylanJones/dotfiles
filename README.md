@@ -1,4 +1,6 @@
 # Dylan's config files
-This is a repository that has most of my normal setup.  I made sure that most of it doesn't require root privelages to install.
-The script will install Powerline, `oh-my-zsh`, my custom Powerline modules, a few vim plugins, and more.
-The file `install.sh` should remove any existing conflicting configuration and replace it with this one.  It should work on any Debian, Raspbian, Ubuntu, or Arch Linux system.
+
+This repository kind of, sort of contains my normal configs.  There's a bunch of stuff missing, but this does cover the gist of it.
+
+
+Take a look at install.sh for an idea of what packages you'll need to install and what symlinks to make, but don't expect it to actually work if you try to run it.

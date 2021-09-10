@@ -1,11 +1,58 @@
-" some reasonable defaults, like syntax highlighting
-source /usr/share/vim/vim??/defaults.vim 
+""""""" Important global settings
+set nocompatible
+set hlsearch
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set foldmethod=syntax
+set mouse=a
+" A POSIX-compatible shell is required instead of fish.
+set shell=/bin/bash
+" Put swapfiles and backups in one spot rather than scattering them around.
+set directory=$HOME/.vim/swap//
+set backupdir=$HOME/.vim/backup//
+set backup
 
-" enable plugins
-execute pathogen#infect()
 
-" enable powerline if we have support
-if has("python3")
+""""""" Autocommands
+" default unfolded (may cause some performance problems?)
+au BufWinEnter * normal zR
+" Correct indentation for YAML files
+au FileType yaml set tabstop=2 shiftwidth=2
+" Use Ruby syntax on Vagrantfiles
+au BufReadPost,BufNewFile \(V\|v\)agrantfile set syntax=ruby
+
+
+""""""" Keybindings
+nnoremap <silent> <C-l> :noh<CR>
+"noremap gy <C-w>s:YcmCompleter GoTo<CR>
+" not so helpful keybindings
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+
+""""""" Plugin-loading section
+" setup and execute vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" List all plugins to be loaded here.
+" After changing any of this list, run
+" :PluginInstall to apply the changes.
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'leafgarland/typescript-vim'
+
+" End plugin loading section
+call vundle#end()
+filetype plugin indent on
+
+
+""""""" Plugin-related configuration
+" Powerline config
+if has("python3") && !has("nvim")
     let g:powerline_pycmd="python3"
     set laststatus=2
     set rtp+=~/.local/lib/python3/site-packages/powerline/bindings/vim
@@ -15,39 +62,13 @@ if has("python3")
     python3 del powerline_setup
 endif
 
-" some settings
-set hlsearch
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set foldmethod=syntax
-set mouse=a
-
-" default unfolded
-au BufWinEnter * normal zR
-
-" set shiftwidth=2,tabstop=2 for yaml
-" au BufNewFile,BufRead .*\.\(yml\|yaml\) set tabstop=2 shiftwidth=2
-au FileType yaml set tabstop=2 shiftwidth=2
-
-" enable ycm
-" ycm causes soooo many problems, let's just not
-"let g:ycm_server_python_interpreter = '/usr/bin/python2'
+" YouCompleteMe related options
 "let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_confirm_extra_conf = 1
 "let g:ycm_extra_conf_globlist = ['~/Arduino/bare_arduino/*']
-" let g:ycm_goto_buffer_command = 'split-or-existing-window'
-" let g:ycm_goto_buffer_command = 'split'
+"let g:ycm_goto_buffer_command = 'split-or-existing-window'
+"let g:ycm_goto_buffer_command = 'split'
 
 let g:AutoPairs = {'(':')', '[':']', '{':'}'}
 
-" helpful keybindings
-nnoremap <silent> <C-l> :noh<CR>
-"noremap gy <C-w>s:YcmCompleter GoTo<CR>
-
-" not so helpful keybindings
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>

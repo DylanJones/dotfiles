@@ -1,4 +1,7 @@
 #!/bin/zsh
+#
+# These are old aliases for zsh, and aren't used anymore - 
+# fish aliases go in their own folder.
 alias emacs='emacs -nw'
 alias intl='setxkbmap us intl'
 alias us='setxkbmap us'
@@ -6,7 +9,7 @@ alias nmap='nmap -n'
 alias tjvpn='sudo openvpn ~/openvpn/tj.ovpn'
 alias vpn='sudo openvpn ~/openvpn/laptop-tun.ovpn'
 
-pacs() { pacman -Fo /usr/bin/$1 }
+pacs() { pacman -F /usr/bin/$1 }
 
 alias rel='exec zsh'
 
