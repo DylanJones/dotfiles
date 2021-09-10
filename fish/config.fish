@@ -11,8 +11,8 @@ if status --is-interactive
         echo (printf "%02x" $rgb[1])(printf "%02x" $rgb[2])(printf "%02x" $rgb[3])
     end
 
-    set -l rgb (hsv-to-rgb (math "0x80+0x"(echo $USER@(hostname) | md5sum | head -c 2)) 160 255)
+    set -l rgb (hsv-to-rgb (math "0x80+0x"(echo $USER@(hostname) | md5sum | head -c 2)) 140 255)
     set fish_color_user (printf "%02x" $rgb[1])(printf "%02x" $rgb[2])(printf "%02x" $rgb[3])
-    set fish_color_host (gen_color $USER@(hostname) 160 255)
-    set fish_color_host_remote (gen_color $USER@(hostname) 160 255)
+    set fish_color_host (gen_color $USER@(hostname) 140 255)
+    set fish_color_host_remote (gen_color $USER@(hostname) 140 255)
 end
