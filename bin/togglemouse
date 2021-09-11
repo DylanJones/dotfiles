@@ -1,3 +1,4 @@
 #!/bin/sh
+DEVNAME='ELAN1205:00 04F3:30E9 Touchpad'
 
-xinput set-prop "Synaptics TM3257-001" "Device Enabled" $(( $(xinput list-props "Synaptics TM3257-001" | grep 'Device Enabled' | cut -d $'\t' -f 3) ^1))
+xinput set-prop "$DEVNAME" "Device Enabled" $(( $(xinput list-props "$DEVNAME" | grep 'Device Enabled' | cut -d $'\t' -f 3) ^1))
